@@ -1,0 +1,37 @@
+<div class="col-lg-8" style="margin-left: 170px;">
+  <div class="card">
+    <div class="card-body">
+      <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+        <h4 class="card-title mb-0">Thêm phòng ban</h4>
+      </div>
+      <div class="wrapper">
+        <hr>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade active show" id="info" role="tabpanel" aria-labelledby="info">
+            <form (ngSubmit)="Addphongban()" novalidate #f="ngForm">
+              <!-- Email -->
+              <label>Tên phòng ban:</label>
+              <input type="text"name="name" [(ngModel)]="name" required class="form-control mb-4" placeholder="Nhập tên phòng ban...">
+              <label>Số điện thoại:</label>
+              <input type="text" name="sdt" [(ngModel)]="sdt"  required class="form-control mb-4" placeholder="Nhập số điện thoại...">
+              <label>Ghi chú:</label>
+              <input type="text" name="ghiChu" [(ngModel)]="ghiChu" required class="form-control mb-4" placeholder="Nhập ghi chú...">
+              <label>Ảnh phòng ban:</label>
+              <input type="file" class="upload" id="file" (change)="onChange($event.target.files[0])">
+                                <input class="form-control" [(ngModel)]="imageHotel.imagePath" placeholder="Link Image"
+                                    name="img" hidden="true">
+                                    <div class="profile-img" >
+                                      <img [src]="img" style="width: 100px; height:100px" alt="User Image">
+                                    </div>
+              <!-- <button type="submit" class="btn btn-primary submit-btn" [disabled]="!f.valid"  >Thêm phòng ban</button> -->
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"  [disabled]="!f.valid">Thêm mới</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

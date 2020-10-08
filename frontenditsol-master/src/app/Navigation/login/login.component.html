@@ -1,0 +1,53 @@
+<div class="container-scroller" *ngIf="!isLogged">
+  <div class="container-fluid page-body-wrapper">
+    <div class="row">
+      <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-full-bg">
+        <div class="row w-100">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-dark text-left p-5">
+              <h2>Đăng nhập</h2>
+              <h4 class="font-weight-light">Nỗ lực mỗi ngày!</h4>
+              <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+                <div class="form-group">
+                    <label for="nombreUsuario">User name</label>
+                    <input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control"
+                    [(ngModel)]="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">passwort</label>
+                    <input type="password" name="password" id="password" class="form-control"
+                    [(ngModel)]="password" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+                        <i class="fas fa-sign-in-alt"></i> Login</button>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- row ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+<div class="container-scroller" *ngIf="isLogged">
+  <div class="container-fluid page-body-wrapper">
+    <div class="row">
+      <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-full-bg">
+        <div class="row w-100">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-dark text-left p-5">
+              <h2>Ban da dang nhap</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- row ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>

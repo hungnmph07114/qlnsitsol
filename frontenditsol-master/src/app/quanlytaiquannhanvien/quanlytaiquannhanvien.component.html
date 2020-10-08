@@ -1,0 +1,85 @@
+<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Quản lý nhân viên</h4>
+      <div class="row">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" [(ngModel)]="ten"  placeholder="Nhập tên hoặc id để tìm kiếm" aria-label="Recipient's username"
+            aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-success" type="button" (click)="timkiemuser()" >Tìm kiếm</button>
+          </div>
+        </div>
+        <div class="text-center" style="margin-left: 15px">
+          <button class="btn-primary" (click)="taikhoan()">  {{action ? "tài khoản hoạt đông":"tài khoản ngưng hoạt động" }}</button>
+        </div>
+        <div class="col-12">
+          <div class="table-responsive">
+            <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table id="order-listing" class="table dataTable no-footer" role="grid"
+                    aria-describedby="order-listing_info" *ngIf="user">
+                    <thead>
+                      <tr role="row">
+                        <th scope="col">STT</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                          aria-sort="ascending" aria-label="Order #: activate to sort column descending"
+                          style="width: 67px;">Tên tên tài khoản
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                          aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                          Tên nhân viên</th>
+                          <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                          aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                          Ngày sinh</th>
+                          <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                          aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                         Địa Chỉ</th>
+                         <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                         aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                        Số CMND</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                         Trạng thái</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                         Action</th>
+                      </tr>                     
+                    </thead>
+                    <tbody>
+                      <tr role="row" class="odd" *ngFor="let item of user; let i = index">
+                        <td class="sorting_1">{{i+1}}</td>
+                        <td>{{item.userName}}</td>
+                        <td>{{item.nhanVien.tenNhanVien}}</td>
+                        <td>{{item.nhanVien.ngaySinh}}</td>
+                        <td>{{item.nhanVien.diaChi}}</td>
+                        <td>{{item.nhanVien.soCmnnd}}</td>
+                        <td *ngIf="item.hoatDong"><div class="badge badge-success badge-fw">Hoat Dong</div></td>
+                        <td *ngIf="!item.hoatDong"><div class="badge badge-danger badge-fw">Khong Hoat Dong</div></td>
+                        <td *ngIf="item.hoatDong">
+                          <button class="btn btn-outline-primary" routerLink="/admin/lock/{{item.id}}">block</button>
+                        </td>
+                        <td *ngIf="!item.hoatDong">
+                            <button class="btn btn-outline-primary" routerLink="/admin/lock/{{item.id}}">unlock</button>
+                         </td>
+                         <td >
+                          <button class="btn btn-outline-primary" routerLink="/admin/updateuser/{{item.id}}">reset</button>
+                       </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-7">
+                  <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

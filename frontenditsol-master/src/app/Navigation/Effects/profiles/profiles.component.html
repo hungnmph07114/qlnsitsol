@@ -1,0 +1,328 @@
+<div class="row user-profile">
+  <div class="col-lg-4 side-left d-flex align-items-stretch">
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card" *ngIf="nhanvien">
+          <div class="card-body avatar" >
+            <h4 class="card-title">Thông tin</h4>
+            <img src="{{nhanvien.img}}" class="img" name="img">
+            <p class="name">{{nhanvien.tenNhanVien}}</p>
+            <p class="designation">-{{nhanvien.phongBan.tenPhongBan}}-</p>
+            <a class="d-block text-center text-dark">{{nhanvien.email}}</a>
+            <a class="d-block text-center text-dark" >{{nhanvien.dienThoai}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 stretch-card">
+        <div class="card">
+          <ngb-tabset [destroyOnHide]="false" *ngIf="isAdmin">
+            <ngb-tab title="Ky luat">
+              <ng-template ngbTabContent>
+                <form (ngSubmit)="kyluat()">
+                  <div class="form-group">
+                    <input type="month" name="ngayPhat" [(ngModel)]="kyLuat.ngayPhat" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label>Hình thức kỷ luật:</label>
+                    <input type="text" name="hinhthuckyluat" [(ngModel)]="kyLuat.hinhthuckyluat" required class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label > Lý do:</label>
+                    <input type="text" class="form-control"  name="lyDo"[(ngModel)]="kyLuat.lyDo" required >
+                  </div>
+                  <div class="form-group">
+                    <label >Tiền phạt:</label>
+                    <input type="number"  class="form-control" name="tienPhat"[(ngModel)]="kyLuat.tienPhat" required >
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Thêm mới</button>
+                </form>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle>Khen thưởng:</ng-template>
+              <ng-template ngbTabContent>
+                <form (ngSubmit)="addkhenthuong()">
+                  <div class="form-group">
+                    <input type="month" name="date" [(ngModel)]="khenthuong.date">
+                  </div>
+                  <div class="form-group">
+                    <label>Hình thức khen thưởng:</label>
+                    <input type="text" name="hinhthuc" [(ngModel)]="khenthuong.hinhthuc" required class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label > Lý do:</label>
+                    <input type="text" class="form-control"  name="noidung"[(ngModel)]="khenthuong.noidung" required >
+                  </div>
+                  <div class="form-group">
+                    <label >Tiền thưởng:</label>
+                    <input type="number" class="form-control" name="sotien"[(ngModel)]="khenthuong.sotien" required >
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Thêm mới</button>
+                </form>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="phụ cấp" >
+              <ng-template ngbTabContent>
+                <form (ngSubmit)="addphucap()">
+                  <div class="form-group">
+                    <input type="month" name="date" [(ngModel)]="phuCap.date">
+                  </div>
+                  <div class="form-group">
+                    <label>Tiền phụ cấp:</label>
+                    <input type="number" name="tienPhuCap" [(ngModel)]="phuCap.tienPhuCap" required class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Thêm mới</button>
+                </form>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Tạm ứng" >
+              <ng-template ngbTabContent>
+                <form (ngSubmit)=" addtamung()">
+                  <div class="form-group">
+                    <input type="month" name="date" [(ngModel)]="tamUng.date">
+                  </div>
+                  <div class="form-group">
+                    <label>Lý do:</label>
+                    <input type="text" name="lyDo" [(ngModel)]="tamUng.lyDo" required class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label >Tiền tạm ứng:</label>
+                    <input type="number" class="form-control" name="tienTamung"[(ngModel)]="tamUng.tienTamung" required >
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Thêm mới</button>
+                </form>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Hệ số lương" >
+              <ng-template ngbTabContent>
+                <form (ngSubmit)="addhsl()">
+                  <div class="form-group">
+                    <input type="month" name="date" [(ngModel)]="luong.date">
+                  </div>
+                  <div class="form-group">
+                    <label >Hệ số lương:</label>
+                    <input type="number" class="form-control" name="heSoLuong"[(ngModel)]="luong.heSoLuong" required >
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Thêm mới</button>
+                </form>
+
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+          <div class="card-body overview"  *ngIf="!isAdmin">
+            <ul class="achivements">
+              <li><p>34</p><p>Projects</p></li>
+              <li><p>23</p><p>Task</p></li>
+              <li><p>29</p><p>Completed</p></li>
+            </ul>
+            <div class="wrapper about-user">
+              <h4 class="card-title mt-4 mb-3">About</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam consectetur ex quod.</p>
+            </div>
+            <div class="info-links">
+              <a class="website" href="http://urbanui.com/">
+                <i class="mdi mdi-earth text-gray"></i>
+                <span>http://urbanui.com/</span>
+              </a>
+              <a class="social-link" href="#">
+                <i class="mdi mdi-facebook text-gray"></i>
+                <span>https://www.facebook.com/johndoe</span>
+              </a>
+              <a class="social-link" href="#">
+                <i class="mdi mdi-linkedin text-gray"></i>
+                <span>https://www.linkedin.com/johndoe</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 side-right stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+          <h4 class="card-title mb-0">Thông tin chi tiết</h4>
+          <ul class="nav nav-tabs tab-solid tab-solid-primary mb-0" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
+                aria-expanded="true">Thông tin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="avatar-tab" data-toggle="tab" href="#avatar" role="tab"
+                aria-controls="avatar">Hình đại diện</a>
+            </li>
+            <li class="nav-item" *ngIf="isAdmin">
+              <a class="nav-link" id="security-tab" data-toggle="tab" href="#security" role="tab"
+                aria-controls="security">Tạo tài khoản</a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" id="changepass-tab" data-toggle="tab" href="#changepass" role="tab"
+                aria-controls="changepass">Đổi mật khẩu</a>
+            </li>
+          </ul>
+        </div>
+        <div class="wrapper">
+          <hr>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+              <form  (ngSubmit)="onUpdate()" *ngIf="nhanvien">
+                <div class="form-group" *ngIf="isAdmin">
+                        <label>Chuyển phòng ban:</label>
+												<select class="form-control select"[(ngModel)]="nhanvien.phongBan" name="phongBan">
+													<option *ngFor="let pb of phongbans" [ngValue]="pb">{{pb.tenPhongBan}}</option>
+                        </select>
+                </div>
+                <label s *ngIf="isAdmin">Tình trạng hoạt đông:</label>
+												<select *ngIf="isAdmin" class="form-control select" [(ngModel)]="nhanvien.action"name="action">
+													<option [ngValue]="1" selected>Hoạt động</option>
+													<option [ngValue]="0">Tạm dừng</option>
+												</select>
+                <div class="form-group" *ngIf="!isAdmin">
+                  <label for="name">Tên nhân viên:</label>
+                  <input type="text" class="form-control" name="tenNhanVien" readonly  [(ngModel)]="nhanvien.tenNhanVien" placeholder="Change user name">
+                </div>
+                <div class="form-group" *ngIf="isAdmin">
+                  <label for="name">Tên nhân viên:</label>
+                  <input type="text" class="form-control" name="tenNhanVien"   [(ngModel)]="nhanvien.tenNhanVien" placeholder="Change user name">
+                </div>
+                <div class="form-group"  *ngIf="!isAdmin">
+                  <label for="name">Chức vụ:</label>
+                  <input type="text" class="form-control" readonly name="chuVu" [(ngModel)]="nhanvien.chuVu" placeholder="Change user name">
+                </div>
+                <div class="form-group"  *ngIf="isAdmin">
+                  <label for="name">Chức vụ:</label>
+                  <input type="text" class="form-control" name="chuVu" [(ngModel)]="nhanvien.chuVu" placeholder="Change user name">
+                </div>
+                <div class="form-group"  *ngIf="!isAdmin">
+                  <label >Ngày bắt đầu làm việc:</label>
+                  <input type="date" class="form-control"  readonly name="ngayBatDau" [(ngModel)]="nhanvien.ngayBatDau" placeholder="Ngày bắt đầu làm việc">
+                </div>
+                <div class="form-group"  *ngIf="isAdmin">
+                  <label >Ngày bắt đầu làm việc:</label>
+                  <input type="date" class="form-control"  name="ngayBatDau" [(ngModel)]="nhanvien.ngayBatDau" placeholder="Ngày bắt đầu làm việc">
+                </div>
+                <div class="form-group" *ngIf="!isAdmin">
+                  <label >Ngày nghỉ việc:</label>
+                  <input type="date" class="form-control" readonly name="ngayKetThuc" [(ngModel)]="nhanvien.ngayKetThuc" placeholder="Ngày bắt đầu làm việc">
+                </div>
+                <div class="form-group" *ngIf="isAdmin">
+                  <label >Ngày nghỉ việc:</label>
+                  <input type="date" class="form-control" name="ngayKetThuc" [(ngModel)]="nhanvien.ngayKetThuc" placeholder="Ngày bắt đầu làm việc">
+                </div>
+                <div class="form-group" *ngIf="!isAdmin">
+                  <label>Ngày sinh:</label>
+                  <input type="text" class="form-control" readonly name="ngaySinh" [(ngModel)]="nhanvien.ngaySinh" placeholder="Ngày sinh">
+                </div>
+                <div class="form-group" *ngIf="isAdmin">
+                  <label>Ngày sinh:</label>
+                  <input type="text" class="form-control" name="ngaySinh" [(ngModel)]="nhanvien.ngaySinh" placeholder="Ngày sinh">
+                </div>
+                <div class="form-group" *ngIf="!isAdmin">
+                  <label for="mobile">Số điện thoại:</label>
+                  <input type="text" class="form-control" readonly name="dienThoai" [(ngModel)]="nhanvien.dienThoai"placeholder="Số điện thoại">
+                </div>
+                <div class="form-group" *ngIf="isAdmin">
+                  <label for="mobile">Số điện thoại:</label>
+                  <input type="text" class="form-control" name="dienThoai" [(ngModel)]="nhanvien.dienThoai"placeholder="Số điện thoại">
+                </div>
+                <div class="form-group"  *ngIf="!isAdmin">
+                  <label >Email nhân viên:</label>
+                  <input type="email" class="form-control" readonly name="email" [(ngModel)]="nhanvien.email" placeholder="Change email address">
+                </div>
+                <div class="form-group"  *ngIf="isAdmin">
+                  <label >Email nhân viên:</label>
+                  <input type="email" class="form-control" name="email" [(ngModel)]="nhanvien.email" placeholder="Change email address">
+                </div>
+                <div class="form-group" *ngIf="!isAdmin">
+                  <label >Số CMND/CCCD:</label>
+                  <input type="email" class="form-control" readonly name="soCmnnd" [(ngModel)]="nhanvien.soCmnnd" placeholder="Số CMND">
+                </div>
+                <div class="form-group"  *ngIf="isAdmin">
+                  <label >Số CMND/CCCD:</label>
+                  <input type="email" class="form-control"   required name="soCmnnd" [(ngModel)]="nhanvien.soCmnnd" placeholder="Số CMND">
+                </div>
+                <div class="form-group" >
+                  <label >Giới tính: {{nhanvien.gioiTinh ? " Nam":"nữ" }}</label>
+                </div>
+                 <div class="form-group" *ngIf="!isAdmin">
+                  <label >Địa chỉ:</label>
+                  <textarea name="address" name="diaChi" readonly [(ngModel)]="nhanvien.diaChi" rows="6" class="form-control"
+                    placeholder="Change address"></textarea>
+                </div>
+                <div class="form-group" *ngIf="isAdmin">
+                  <label >Địa chỉ:</label>
+                  <textarea name="address" name="diaChi" [(ngModel)]="nhanvien.diaChi" rows="6" class="form-control"
+                    placeholder="Change address"></textarea>
+                </div>
+                <div class="form-group mt-5" *ngIf="isAdmin">
+                  <button type="submit" class="btn btn-success mr-2">Cập nhật</button>             
+                </div>
+              </form>
+            </div><!-- tab content ends -->
+            <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
+              <div class="wrapper mb-5 mt-4">
+                <span class="badge badge-warning text-white">Chú ý: </span>
+                <p class="d-inline ml-3 text-muted"> Vui lòng chọn ảnh!</p>
+              </div>
+              <form *ngIf="nhanvien" (ngSubmit)=" onUpdateimg()">
+                <input type="file" class="upload" id="file" (change)="onChange($event.target.files[0])">
+                                <input class="form-control" [(ngModel)]="imageHotel.imagePath" placeholder="Đường dẫn..."
+                                    name="img" hidden="true">
+                                    <div class="profile-img" >
+                                      <img [src]="img" style="width: 100px; height:100px" alt="User Image">
+                                    </div>
+                <div class="form-group mt-5">
+                  <button type="submit" class="btn btn-success mr-2" >Cập nhật</button>                
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+              <form #f="ngForm" (ngSubmit) = "onRegister()" novalidate>
+                <div class="form-group">
+                  <label for="change">Tài khoản:</label>
+                  <div class="form-group">
+                    <input type="text" name="userName"  class="form-control" [(ngModel)] = "userName" required placeholder="Nhập tài khoản đăng ký">
+                  </div>
+                  <label for="change">Quyền quản trị:</label>
+                  <select  class="form-control select" [(ngModel)]="role"name="role">
+                    <option [ngValue]="1" selected>MANAGER</option>
+                    <option [ngValue]="2">ADMIN</option>
+                </select>
+                  <label for="change-password">Mật khẩu</label>
+                  <input type="password"name="password" id= "password" class="form-control" [(ngModel)] = "password" required 
+                    placeholder="Nhập mật khẩu">
+                </div>             
+                <div class="form-group mt-5">
+                  <button type="submit" class="btn btn-success mr-2" [disabled] ="!f.valid">Cập nhật</button>
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="changepass" role="tabpanel" aria-labelledby="changepass-tab">
+              <form #f="ngForm" (ngSubmit) = "doimatkhau()" novalidate>
+                <div class="form-group">
+                  <label for="change-password">Mật khẩu</label>
+                  <input type="password"name="password"  class="form-control" [(ngModel)] = "password" required 
+                    placeholder="Nhập mật khẩu">
+                </div>             
+                <div class="form-group mt-5">
+                  <button type="submit" class="btn btn-success mr-2" [disabled] ="!f.valid">Cập nhật</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial:../../partials/_footer.html -->
+<footer class="footer">
+  <div class="container-fluid clearfix">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2017
+      <a href="#">UrbanUI</a>. All rights reserved.</span>
+    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
+      with <i class="mdi mdi-heart text-danger"></i></span>
+  </div>
+</footer>
+<!-- partial -->

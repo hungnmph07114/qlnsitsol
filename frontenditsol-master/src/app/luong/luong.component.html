@@ -1,0 +1,177 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Quản lý lương  nhân viên</h4>
+    <div class="row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">Tháng năm</span>
+        </div>
+        <input type="month" name="date" [(ngModel)]="date" (change)="onchaneDate()">
+      </div>
+     
+   
+      <!-- <div class="col-12">
+        <div class="table-responsive">
+          <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <div class="row">
+              <div class="col-sm-12">
+                <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button>
+                <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
+                <button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
+                <button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
+                <div class="example-container mat-elevation-z8">
+                  <mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" >
+                
+                
+                    <ng-container matColumnDef="tenNhanVien">
+                      <mat-header-cell *matHeaderCellDef> Tên Nhân viên </mat-header-cell>
+                      <mat-cell *matCellDef="let luong" routerLink="/admin/profile/{{luong.id.nhanVien.id}}"> {{luong.id.nhanVien.tenNhanVien}} </mat-cell>
+                    </ng-container>
+                    <ng-container  matColumnDef="tenPhongBan">
+                      <mat-header-cell *matHeaderCellDef > Tên phòng ban </mat-header-cell>
+                      <mat-cell *matCellDef="let luong" > {{luong.id.nhanVien.phongBan.tenPhongBan}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="ngayCong">
+                      <mat-header-cell *matHeaderCellDef> <icons-image _ngcontent-lty-c22="" _nghost-lty-c19="" (click)="updateCong()"><span _ngcontent-lty-c19="" class="material-icons icon-image-preview">update</span></icons-image> Ngày công </mat-header-cell>
+                      <mat-cell *matCellDef="let luong"> {{luong.ngayCong}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="kyLuat">
+                      <mat-header-cell *matHeaderCellDef> Tiền Kỷ luật </mat-header-cell>
+                      <mat-cell *matCellDef="let luong" > {{luong.kyLuat.tienPhat}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="heSoLuong">
+                      <mat-header-cell *matHeaderCellDef> Hệ số lương </mat-header-cell>
+                      <mat-cell *matCellDef="let luong"> {{luong.heSoLuong.heSoLuong}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="khenThuongKl">
+                      <mat-header-cell *matHeaderCellDef> Khen thưởng </mat-header-cell>
+                      <mat-cell *matCellDef="let luong"> {{luong.khenThuongKl.soTien}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="tamUng">
+                      <mat-header-cell *matHeaderCellDef> Tạm ứng </mat-header-cell>
+                      <mat-cell *matCellDef="let luong"> {{luong.tamUng.tienTamung}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="phuCap">
+                      <mat-header-cell *matHeaderCellDef> Phụ cấp </mat-header-cell>
+                      <mat-cell *matCellDef="let luong"> {{luong.phuCap.tienPhuCap}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="date">
+                      <mat-header-cell *matHeaderCellDef> Tháng </mat-header-cell>
+                      <mat-cell *matCellDef="let luong"> {{luong.id.date}} </mat-cell>
+                    </ng-container>
+                   
+                    <ng-container matColumnDef="tongLuong">
+                      <mat-header-cell *matHeaderCellDef> Tổng lương </mat-header-cell>
+                      <mat-cell *matCellDef="let luong"> {{(luong.ngayCong * luong.heSoLuong.heSoLuong - luong.tamUng.tienTamung - luong.kyLuat.tienPhat  + (luong.phuCap.tienPhuCap -- luong.khenThuongKl.soTien )) | number:0}} VND </mat-cell>
+                    </ng-container>
+                
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                 
+                </div>
+                
+                <div>
+                
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-12">
+        <div class="table-responsive">
+          <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="file" (click)="exportExcel()">Excel</button>
+                
+                <table id="order-listing" class="table dataTable no-footer" role="grid"
+                  aria-describedby="order-listing_info">
+                  <thead>
+                    <tr role="row">
+                      <th >Tên Nhân Viên</th>
+                      <th >Tên Phòng Ban</th>
+                      <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-sort="ascending" aria-label="Order #: activate to sort column descending"
+                        style="width: 67px;">Ngày Công
+                      </th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                        Tiền Kỷ Luật</th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Customer: activate to sort column ascending" style="width: 85.4px;">
+                        Hệ Số Lương</th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Status: activate to sort column ascending" style="width: 67.8px;">Khen Thưởng
+                      </th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                      aria-label="Status: activate to sort column ascending" style="width: 67.8px;">Tạm Ứng
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                    aria-label="Status: activate to sort column ascending" style="width: 67.8px;">Phụ Cấp
+                  </th>
+                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                    aria-label="Status: activate to sort column ascending" style="width: 67.8px;">Tháng
+                  </th>
+                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                    aria-label="Status: activate to sort column ascending" style="width: 67.8px;">Tổng Lương
+                  </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr role="row" class="odd" *ngFor="let value of luong; let i = index">
+                      <!-- <td class="sorting_1">{{i+1}}</td>                       -->
+                      <td routerLink="/admin/taikhoan/{{value.id}}">  {{value.id.nhanVien.tenNhanVien}} </td>
+                      <td>{{value.id.nhanVien.phongBan.tenPhongBan}}</td>
+                      <td>{{value.ngayCong}}</td>
+                      <td>{{value.kyLuat.tienPhat}}</td>
+                      <td>{{value.heSoLuong.heSoLuong}}</td>
+                      <td>{{value.khenThuongKl.soTien}}</td>
+                      <td>{{value.tamUng.tienTamung}}</td>
+                      <td>{{value.phuCap.tienPhuCap}}</td>
+                      <td>{{value.id.date}}</td>
+              
+                      {{(value.ngayCong * value.heSoLuong.heSoLuong - value.tamUng.tienTamung - value.kyLuat.tienPhat  + (value.phuCap.tienPhuCap -- value.khenThuongKl.soTien )) | number:0}} VND
+                    </tr>
+                    <!-- <tr>
+                      <td><i class="fas fa-angle-double-left fa-2x" (click)="rewind()"></i></td>
+                   
+                      <td >
+                          <span *ngFor="let p of totalPages; let i = index">
+                              <a style="cursor: pointer;" (click)="setPage(i)"
+                               [ngClass]="{'text-primary': i=== page}">{{i + 1}}&nbsp;&nbsp;&nbsp;</a>
+                          </span>
+                        </td>
+                      <td><i class="fas fa-angle-double-right fa-2x" (click)="forward()"></i></td>
+                  </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

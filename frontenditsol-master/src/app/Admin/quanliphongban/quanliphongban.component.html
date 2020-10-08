@@ -1,0 +1,143 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Quản lý Phòng ban</h4>
+    <div class="row">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="tenPhongBan" placeholder="Nhập tên hoặc id để tìm kiếm" aria-label="Recipient's username"
+          aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-success"  (click)="listPhongBan()" type="button">Tìm kiếm</button>
+        </div>
+      </div>
+      <div>
+        <a class="btn btn-primary" routerLink="/admin/them" >Thêm Phòng Ban</a>
+      </div>
+      <div class="col-12">
+        <div class="table-responsive">
+          <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="order-listing" class="table dataTable no-footer" role="grid"
+                  aria-describedby="order-listing_info">
+                  <thead>
+                    <tr role="row">
+                      <th scope="col" (click)="setOrder('id')">STT</th>
+                      <th (click)="setOrder('tenPhongBan')">Tên phòng ban</th>
+                      <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-sort="ascending" aria-label="Order #: activate to sort column descending"
+                        style="width: 67px;">Số điện thoại
+                      </th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                        Ghi chú</th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Customer: activate to sort column ascending" style="width: 85.4px;">
+                        Trạng thái</th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Status: activate to sort column ascending" style="width: 67.8px;">Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr role="row" class="odd" *ngFor="let pb of phongbans; let i = index">
+                      <td class="sorting_1">{{i+1}}</td>                      
+                      <td routerLink="/admin/taikhoan/{{pb.id}}">  {{pb.tenPhongBan}} </td>
+                      <td>{{pb.dienThoai}}</td>
+                      <td>{{pb.ghiChu}}</td>
+                      <td><div *ngIf="pb.action" class="badge badge-success badge-fw">Hoat Dong</div><div *ngIf="!pb.action" class="badge badge-danger badge-fw">Không hoạt động</div> </td>
+    
+                      <td>
+                        <a class="btn btn-primary" data-dismiss="modal" routerLink="/admin/phongban/sua/{{pb.id}}"> Sửa</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><i class="fas fa-angle-double-left fa-2x" (click)="rewind()"></i></td>
+                   
+                      <td >
+                          <span *ngFor="let p of totalPages; let i = index">
+                              <a style="cursor: pointer;" (click)="setPage(i)"
+                               [ngClass]="{'text-primary': i=== page}">{{i + 1}}&nbsp;&nbsp;&nbsp;</a>
+                          </span>
+                        </td>
+                      <td><i class="fas fa-angle-double-right fa-2x" (click)="forward()"></i></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<h4 class="card-title" style="color: 'grey'">Bảng phòng ban</h4>
+
+<div class="card">
+  <div class="card-body">
+    <div class="col-12">
+      <div class="table-responsive">
+        <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+          <div class="row">
+            <div class="col-sm-12">         
+              <div class="example-container mat-elevation-z8">
+                <mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" >
+                   
+                  <ng-container  matColumnDef="tenPhongBan">
+                    <mat-header-cell *matHeaderCellDef > Tên phòng ban </mat-header-cell>
+                    <mat-cell *matCellDef="let phongbans" routerLink="/admin/taikhoan/{{phongbans.id}}" > 
+                      {{phongbans.tenPhongBan}} 
+                  </mat-cell>
+                  </ng-container>
+
+                  <ng-container  matColumnDef="dienThoai">
+                    <mat-header-cell *matHeaderCellDef > Số điện thoại </mat-header-cell>
+                    <mat-cell *matCellDef="let phongbans" > <div *ngIf="phongbans.dienThoai">{{phongbans.dienThoai}}</div><div *ngIf="!phongbans.dienThoai">Không có</div> </mat-cell>
+                  </ng-container>
+
+                  <ng-container  matColumnDef="ghiChu">
+                    <mat-header-cell *matHeaderCellDef > Ghi chú </mat-header-cell>
+                    <mat-cell *matCellDef="let phongbans" > {{phongbans.ghiChu}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container  matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef > Trạng thái </mat-header-cell>
+                    <mat-cell *matCellDef="let phongbans" > <div *ngIf="phongbans.action" class="badge badge-success badge-fw">Hoat Dong</div><div *ngIf="!phongbans.action" class="badge badge-danger badge-fw">Không hoạt động</div> </mat-cell>
+                  </ng-container>
+
+                  <ng-container  matColumnDef="Actions">
+                      <mat-header-cell *matHeaderCellDef > Action </mat-header-cell>
+                      <mat-cell *matCellDef="let phongbans" >   <a class="btn btn-primary" data-dismiss="modal" routerLink="/admin/phongban/sua/{{phongbans.id}}"> Sửa</a> </mat-cell>
+                    </ng-container>
+                                        
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+               
+              </div>
+              
+              <div>
+              
+              </div>
+    
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-7">
+              <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

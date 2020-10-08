@@ -1,0 +1,93 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar" style="margin-bottom: 10px;">
+  <ul class="nav">
+    <li class="nav-item nav-profile">
+      <div class="nav-link">
+        <div class="profile-image">
+          <img src={{nhanvien.img}} alt="image">
+          <span class="online-status online"></span>
+          <!--change class online to offline or busy as needed-->
+        </div>
+        <div class="profile-name" *ngIf="nhanvien">
+          <p class="name">
+            {{nhanvien.tenNhanVien}}
+          </p>
+        </div>
+      </div>
+    </li>
+    <!-- Trang chủ -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/home">
+        <i class="icon-rocket menu-icon"></i>
+        <span class="menu-title" >Trang chủ</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <!-- Tài khoản -->
+
+    <!-- Phòng ban -->
+    <li class="nav-item" *ngIf="isAdmin">
+      <a class="nav-link" routerLink="/admin/phongban">
+        <i class="icon-briefcase menu-icon"></i>
+        <span class="menu-title">Quản lí phòng ban</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="isAdmin">
+      <a class="nav-link" routerLink="/admin/chamcong">
+        <i class=" icon-arrow-down  menu-icon"> </i>
+        <span class="menu-title">Điểm danh</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="isAdmin">
+      <a class="nav-link" routerLink="/admin/luong">
+        <i class=" icon-wallet menu-icon"> </i>
+        <span class="menu-title">Lương</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="isManager">
+      <a class="nav-link" routerLink="/admin/taikhoan">
+        <i class="  icon-settings menu-icon"> </i>
+        <span class="menu-title">Quản lí tài khoản</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="!isAdmin">
+      <a class="nav-link" routerLink="/admin/profile/{{nhanVienId}}">
+        <i class=" icon-user menu-icon"> </i>
+        <span class="menu-title">Thông tin nhân viên</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="!isAdmin">
+      <a class="nav-link" routerLink="/admin/luongNhanVien/{{nhanVienId}}">
+        <i class=" icon-wallet menu-icon"> </i>
+        <span class="menu-title">Bảng lương</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="!isAdmin">
+      <a class="nav-link" routerLink="/admin/diemDanh/{{nhanVienId}}">
+        <i class=" icon-arrow-down  menu-icon"> </i>
+        <span class="menu-title">Điểm danh</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+    <!-- Đổi mật khẩu -->
+    <!-- <li class="nav-item" >
+      <a class="nav-link" routerLink="/admin/profile">
+        <i class="icon-settings menu-icon"></i>
+        <span class="menu-title">Thông tin tài khoản</span>
+      </a>
+    </li> -->
+    <!-- Đăng xuất -->
+    <li class="nav-item" >
+      <a class="nav-link" routerLink="/login">
+        <i class="icon-logout menu-icon"></i>
+        <span class="menu-title" *ngIf="!isLogged" (click)="logout()">Đăng xuất</span>
+        <!-- <span class="badge badge-success">Quản lí tài khoản</span> -->
+      </a>
+    </li>
+  </ul>
+</nav>

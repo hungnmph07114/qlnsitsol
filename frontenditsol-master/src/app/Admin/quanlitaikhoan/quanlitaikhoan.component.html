@@ -1,0 +1,93 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Quản lý nhân viên</h4>
+    <div class="row">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="tenNhanVien" placeholder="Nhập tên hoặc id để tìm kiếm" aria-label="Recipient's username"
+          aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-success"  (click)="listnhanvien()" type="button">Tìm kiếm</button>
+        </div>
+      </div>
+      <div class="text-center" style="margin-left: 15px">
+        <button class="btn-primary" (click)="themnhanvien()"> Thêm nhân viên </button>
+      </div>
+      <div class="text-center" style="margin-left: 15px">
+        <button class="btn-primary" (click)="hienThiNhanVienLamViec()">  {{action ? "Nhân viên làm việc":"Nhân viên nghỉ việc" }}</button>
+      </div>
+      <div class="col-12">
+        <div class="table-responsive">
+          <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="order-listing" class="table dataTable no-footer" role="grid"
+                  aria-describedby="order-listing_info">
+                  <thead>
+                    <tr role="row">
+                      <th scope="col">STT</th>
+                      <th>Ảnh</th>
+                      <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-sort="ascending" aria-label="Order #: activate to sort column descending"
+                        style="width: 67px;">Tên Nhân viên
+                      </th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Purchased On: activate to sort column ascending" style="width: 117.4px;">
+                        Ngày sinh</th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Customer: activate to sort column ascending" style="width: 85.4px;">
+                        Giới tính</th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Status: activate to sort column ascending" style="width: 67.8px;">Số điện thoại
+                      </th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                        aria-label="Actions: activate to sort column ascending" style="width: 71.8px;"> Chức vụ
+                      </th>
+                      <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                      aria-label="Actions: activate to sort column ascending" style="width: 71.8px;"> Email
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1"
+                    aria-label="Actions: activate to sort column ascending" style="width: 71.8px;"> Chi tiết
+                  </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr role="row" class="odd" *ngFor="let item of nhanvien; let i = index">
+                      <td class="sorting_1">{{i+1}}</td>
+                      <td><img src={{item.img}} style="width:30px ; height: 30px" alt=""></td>
+                      <td>{{item.tenNhanVien}}</td>
+                      <td>{{item.ngaySinh}}</td>
+                      <td>{{item.gioiTinh ?"Nam":"nữ"}}</td>
+                      <td>{{item.dienThoai}}</td>
+                      <td>{{item.chuVu}}</td>
+                      <td>{{item.email}}</td>
+                      <td>
+                        <button class="btn btn-outline-primary" routerLink="/admin/profile/{{item.id}}">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><i class="fas fa-angle-double-left fa-2x" (click)="rewind()"></i></td>
+                   
+                      <td >
+                          <span *ngFor="let p of totalPages; let i = index">
+                              <a style="cursor: pointer;" (click)="setPage(i)"
+                               [ngClass]="{'text-primary': i=== page}">{{i + 1}}&nbsp;&nbsp;&nbsp;</a>
+                          </span>
+                        </td>
+                      <td><i class="fas fa-angle-double-right fa-2x" (click)="forward()"></i></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="col-lg-8" style="margin-left: 170px;">
+  <div class="card">
+    <div class="card-body">
+      <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+        <h4 class="card-title mb-0">Thêm nhân viên</h4>
+      </div>
+      <div class="wrapper">
+        <hr>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade active show" id="info" role="tabpanel" aria-labelledby="info">
+            <form  (ngSubmit)=" addnhanvien(nhanvien)"  novalidate #f="ngForm">
+              <label>Tên nhân viên:</label>
+              <input type="text"name="tenNhanVien"   [(ngModel)]="nhanvien.tenNhanVien"  required class="form-control mb-4" placeholder="Nhập tên nhân viên...">
+              <label>Số điện thoại:</label>
+              <input type="text" name="dienThoai"    [(ngModel)]="nhanvien.dienThoai" required class="form-control mb-4" placeholder="Nhập số điện thoại...">
+              <label>Email nhân viên:</label>
+              <input type="text" name="email" [(ngModel)]="nhanvien.email" required class="form-control mb-4" placeholder="Nhập email nhân viên...">
+              <label>Địa chỉ:</label>
+              <input type="text" name="diaChi" [(ngModel)]="nhanvien.diaChi" required class="form-control mb-4" placeholder="Nhập địa chỉ...">
+              <label>Số CMND:</label>
+              <input type="number" min="10" max="11" name="soCmnnd" [(ngModel)]="nhanvien.soCmnnd" required class="form-control mb-4" placeholder="Nhập số CMND...">
+              <label>Chức vụ:</label>
+              <input type="text" name="chuVu" [(ngModel)]="nhanvien.chuVu" required class="form-control mb-4" placeholder="Chọn chức vụ...">
+              <label>Ngày bắt đầu:</label>
+              <input type="date" name="ngayBatDau" [(ngModel)]="nhanvien.ngayBatDau" required class="form-control mb-4" placeholder="Nhập ngày bắt đầu làm...">
+              <label>Ngày sinh:</label>
+              <input type="text" name="ngaySinh" [(ngModel)]="nhanvien.ngaySinh" required class="form-control mb-4" placeholder="Nhập ngày sinh...">
+             
+              <label>Giới tính</label>
+												<select class="form-control select"[(ngModel)]="nhanvien.gioiTinh" name="gioitinh">
+													<option [ngValue]="null" selected>Lựa chọn</option>
+													<option [ngValue]="1">Nam</option>
+													<option [ngValue]="0">Nữ</option>
+                        </select>
+                        <label>Ảnh nhân viên:</label>
+              <input type="file" class="upload" id="file" (change)="onChange($event.target.files[0])">
+                                <input class="form-control" [(ngModel)]="imageHotel.imagePath" placeholder="Link Image"
+                                    name="img" hidden="true">
+                                    <div class="profile-img" >
+                                      <img [src]="img" style="width: 100px; height:100px" alt="User Image">
+                                    </div>
+              <!-- <button type="submit" class="btn btn-primary submit-btn" [disabled]="!f.valid"  >Thêm phòng ban</button> -->
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Thêm mới</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

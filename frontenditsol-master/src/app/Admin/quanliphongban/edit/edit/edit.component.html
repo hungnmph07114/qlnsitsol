@@ -1,0 +1,42 @@
+<div class="col-lg-8" style="margin-left: 170px;">
+  <div class="card">
+    <div class="card-body">
+      <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+        <h4 class="card-title mb-0">Thêm phòng ban</h4>
+      </div>
+      <div class="wrapper">
+        <hr>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade active show" id="info" role="tabpanel" aria-labelledby="info">
+            <form (ngSubmit)="Editphongban(phongban)" novalidate #f="ngForm">
+              <!-- Email -->
+              <label>Tên phòng ban:</label>
+              <input type="text"name="tenPhongBan" [(ngModel)]="phongban.tenPhongBan" required class="form-control mb-4" placeholder="Nhập phòng ban...">
+              <label>Số điện thoại:</label>
+              <input type="text" name="sdt" [(ngModel)]="phongban.dienThoai"  required class="form-control mb-4" placeholder="Nhập số điện thoại...">
+              <label>Ghi chú:</label>
+              <input type="text" name="ghiChu" [(ngModel)]="phongban.ghiChu" required class="form-control mb-4" placeholder="Nhập ghi chú...">
+              <label>Tình trạng hoạt đông:</label>
+												<select class="form-control select" [(ngModel)]="phongban.action"name="action">
+													<option [ngValue]="1" selected>Hoạt động</option>
+													<option [ngValue]="0">Tạm dừng</option>
+												</select>
+              <input type="file" class="upload" id="file" (change)="onChange($event.target.files[0])">
+                                <input class="form-control" [(ngModel)]="imageHotel.imagePath" placeholder="Link Image"
+                                    name="img" hidden="true">
+                                    <div class="profile-img" >
+                                      <img [src]="phongban.img" style="width: 100px; height:100px" alt="User Image">
+                                    </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"  [disabled]="!f.valid"  data-dismiss="modal">Sửa</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

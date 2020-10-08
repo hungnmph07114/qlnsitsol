@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+      <div class="input-group mb-3">
+    
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Tháng năm</span>
+            </div>
+            <input type="month" name="date" [(ngModel)]="date" (change)="onchaneDate()">
+          </div>
+      </div>     
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th >ID</th>
+                <th>Ngày</th>
+                <th >Trạng thái</th>
+             
+               </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let nv of listDiemDanh;let i = index">
+                <td >{{i+1}}</td>
+                <td >{{nv.id.date}}</td>
+                <td>
+                  <div *ngIf="nv.dilam" class="badge badge-success badge-fw">Đi làm</div><div *ngIf="!nv.dilam" class="badge badge-danger badge-fw">Nghỉ</div>
+                </td>
+              
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
